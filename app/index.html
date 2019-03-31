@@ -8,9 +8,25 @@
         <meta name="mobile-web-app-capable" content="yes">
 
         <link rel="stylesheet" href="/modules/bootstrap/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/modules/toastr/build/toastr.min.css">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
             integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
             crossorigin="anonymous">
+
+    <style media="screen">
+        #toast-container {
+            top: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+        }
+        #toast-container > div {
+            opacity: 1;
+            box-shadow: 0 0 2rem rgba(0, 0, 0, 0.75);
+            border-radius: 0;
+            width: 100%;
+        }
+    </style>
 
     </head>
     <body class="bg-info">
@@ -41,7 +57,7 @@
                     <div class="modal-body p-1 text-center">
 
                         <video id="player" autoplay class="w-100 rounded bg-white" style="height:300px"></video>
-                        <button data-dismiss="modal" type="button id="shutter" class="fas fa-circle fa-3x rounded-circle bg-white text-danger p-1 my-2"></button>
+                        <button data-dismiss="modal" type="button" id="shutter" class="fas fa-circle fa-3x rounded-circle bg-white text-danger p-1 my-2"></button>
 
                     </div>
                 </div>
@@ -52,6 +68,18 @@
         <!-- Scripts -->
         <script src="/modules/jquery/dist/jquery.min.js"></script>
         <script src="/modules/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="/modules/toastr/build/toastr.min.js"></script>
+        <script src="main.js"></script>
+
+        <!-- Init App if Supported -->
+        <script>
+            // check compatibility
+            if ('mediaDevices' in navigator){
+                _init();
+            } else {
+                toastr.error(null, 'This app is not supported by your browser', { timeout: 30000 });
+            }
+        </script>
 
     </body>
 </html>

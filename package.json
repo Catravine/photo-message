@@ -6,11 +6,12 @@
   "author": "Caroline Courtney <caroline@carolinecourtney.com>",
   "license": "MIT",
   "scripts": {
-      "start": "node server/"
+    "start": "node server/"
   },
   "dependencies": {
     "bootstrap": "^4.3.1",
     "express": "^4.16.4",
-    "jquery": "^3.3.1"
+    "jquery": "^3.3.1",
+    "toastr": "^2.1.4"
   }
 }

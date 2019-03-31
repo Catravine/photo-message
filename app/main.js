@@ -3,6 +3,36 @@ const camera = new Camera(document.getElementById('player'));
 
 // Main app logic
 const _init = () => {
+
+    // Init new message insance
+    const messages = new Message();
+
+    // Notify user of connection errors
+    window.addEventListener('message_error', () => {
+        toastr.error('Message could not be retrieved<br>Will keep trying.', 'Network Connection Error')
+    });
+
+    // Listen for existing messages from server
+    window.addEventListener('messages_ready', (e) => {
+
+        // remove loader
+        $('#loader').remove();
+
+        // Check for some messages existing
+        if(messages.all.length == 0) toastr.info('Add the First message', 'No Messages');
+
+        // emtpy out existing messages if this update is from a reconnection
+        $('#messages').empty();
+
+        // Loop thru and render all messages_ready
+        messages.all.reverse().forEach(renderMessage);
+    });
+
+    // Listen for new message event
+    window.addEventListener('new_message', (e) => {
+        renderMessage(e.detail)
+    });
+
     // Switch on the camera as app is launched
     $('#viewfinder').on("show.bs.modal", () => {
         camera.switch_on();
@@ -32,8 +62,12 @@ const _init = () => {
             return
         }
 
+        // Add new messages
+        let message = messages.add(camera.photo, caption);
+
         // Render new message in feed
-        renderMessage({ photo: camera.photo, caption });
+        renderMessage(message);
+        console.log(messages.all)
 
         // Reset caption field on success
         $('#caption').val('');

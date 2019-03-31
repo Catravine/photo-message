@@ -1,19 +1,23 @@
-// Main app logic
+// Init new camera instance on the player node
+const camera = new Camera(document.getElementById('player'));
 
+// Main app logic
 const _init = () => {
     // Switch on the camera as app is launched
     $('#viewfinder').on("show.bs.modal", () => {
-        console.log("camera on");
+        camera.switch_on();
     });
 
     // Switch off the camera in viewfinder
     $('#viewfinder').on("hidden.bs.modal", () => {
-        console.log("camera off");
+        camera.switch_off();
     });
 
     // Take Photo
     $('#shutter').on("click", () => {
-        console.log('take photo')
+        let photo = camera.take_photo();
+        // show photo preview in camera button
+        $('#camera').css('background-image', `url(${photo})`).addClass('withPhoto')
     });
 
     // Submit messages
@@ -23,7 +27,7 @@ const _init = () => {
         let caption = $('#caption').val();
 
         // Check mssage is okay
-        if(/*!photo || */!caption) {
+        if(!camera.photo || !caption) {
             toastr.warning("Photo & Caption required", 'Incomplete Message');
             return
         }
@@ -32,5 +36,7 @@ const _init = () => {
 
         // Reset caption field on success
         $('#caption').val('');
+        $('#camera').css('background-image', '').removeClass('withPhoto')
+        camera.photo = null;
     });
 }

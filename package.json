@@ -1,0 +1,16 @@
+{
+  "name": "PhotoMsg",
+  "version": "1.0.0",
+  "description": "Simple photo-caption PWA",
+  "main": "srever/",
+  "author": "Caroline Courtney <caroline@carolinecourtney.com>",
+  "license": "MIT",
+  "scripts": {
+      "start": "node server/"
+  },
+  "dependencies": {
+    "bootstrap": "^4.3.1",
+    "express": "^4.16.4",
+    "jquery": "^3.3.1"
+  }
+}

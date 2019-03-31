@@ -6,13 +6,15 @@
   "author": "Caroline Courtney <caroline@carolinecourtney.com>",
   "license": "MIT",
   "scripts": {
-    "start": "node server/"
+    "start": "node server/",
+    "build": "node sw_build.js"
   },
   "dependencies": {
     "bootstrap": "^4.3.1",
     "express": "^4.16.4",
     "jquery": "^3.3.1",
     "socket.io": "^2.2.0",
-    "toastr": "^2.1.4"
+    "toastr": "^2.1.4",
+    "workbox-build": "^4.1.1"
   }
 }
